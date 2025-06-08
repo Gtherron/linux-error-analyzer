@@ -1,0 +1,24 @@
+#!/bin/bash
+
+echo "🔧 Building all services..."
+docker-compose build
+
+echo "🚀 Starting containers..."
+docker-compose up -d
+
+echo "⌛ Waiting for services to start..."
+sleep 5
+
+echo "📊 Available Services:"
+echo " - API Gateway:     http://localhost:8000"
+echo " - Frontend:        http://localhost:3000"
+echo " - Prometheus:      http://localhost:9090"
+echo " - Grafana:         http://localhost:3001"
+echo " - Log Generator:   Runs automatically (simulates errors)"
+echo ""
+echo "📋 Login (Grafana):"
+echo " - Username: admin"
+echo " - Password: admin"
+echo ""
+echo "📂 Logs:"
+docker-compose logs -f
