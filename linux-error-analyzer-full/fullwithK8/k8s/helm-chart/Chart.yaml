@@ -1,0 +1,6 @@
+apiVersion: v2
+name: linux-error-analyzer
+description: Helm chart for deploying Linux Error Analyzer
+type: application
+version: 0.1.0
+appVersion: "1.0"

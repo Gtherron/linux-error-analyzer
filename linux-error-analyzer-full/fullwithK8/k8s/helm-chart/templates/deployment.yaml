@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: linux-error-analyzer
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: linux-error-analyzer
+  template:
+    metadata:
+      labels:
+        app: linux-error-analyzer
+    spec:
+      containers:
+        - name: analyzer
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.service.port }}

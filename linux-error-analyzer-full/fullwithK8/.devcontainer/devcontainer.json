@@ -1,0 +1,13 @@
+{
+  "name": "Linux Error Analyzer Dev",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "api-gateway",
+  "workspaceFolder": "/workspace",
+  "forwardPorts": [8000, 3000, 9090, 3001],
+  "postCreateCommand": "./run_local_sh",
+  "customizations": {
+    "vscode": {
+      "extensions": ["ms-azuretools.vscode-docker"]
+    }
+  }
+}

@@ -1,0 +1,57 @@
+import os
+import zipfile
+
+# Define folder structure
+base_path = "/mnt/data/linux-error-analyzer"
+folders = [
+    "api-gateway",
+    "parser",
+    "log-watcher",
+    "deduplicator",
+    "analyzer",
+    "cli-ingest",
+    "frontend",
+    "k8s",
+    ".github/workflows",
+    "monitoring",
+    "tests",
+]
+
+# Create base and subfolders
+for folder in folders:
+    os.makedirs(os.path.join(base_path, folder), exist_ok=True)
+
+# Sample placeholder files
+sample_files = {
+    "api-gateway/main.py": "# API Gateway Main\n",
+    "parser/parser.py": "# Parser Module\n",
+    "log-watcher/watcher.py": "# Log Watcher using watchdog\n",
+    "deduplicator/dedupe.py": "# Deduplication logic\n",
+    "analyzer/analyzer.py": "# Analysis engine\n",
+    "cli-ingest/cli.py": "# CLI for local ingestion\n",
+    "frontend/README.md": "# Frontend Placeholder\n",
+    "k8s/deployment.yaml": "# Kubernetes deployment\n",
+    "monitoring/prometheus.yml": "# Prometheus config\n",
+    "monitoring/grafana-dash.json": "{ }",
+    "tests/test_logs.py": "# Simulate log ingestion\n",
+    ".github/workflows/main.yml": "name: CI\non: push\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n    - uses: actions/checkout@v3\n",
+    "docker-compose.yml": "version: '3'\nservices:\n  api-gateway:\n    build: ./api-gateway\n",
+    "README.md": "# Linux Error Analyzer\nThis is a training project for sysadmins.",
+}
+
+# Create placeholder files
+for path, content in sample_files.items():
+    full_path = os.path.join(base_path, path)
+    with open(full_path, "w") as f:
+        f.write(content)
+
+# Zip the folder for reference (if needed)
+zip_path = f"{base_path}.zip"
+with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zipf:
+    for root, _, files in os.walk(base_path):
+        for file in files:
+            abs_path = os.path.join(root, file)
+            rel_path = os.path.relpath(abs_path, base_path)
+            zipf.write(abs_path, rel_path)
+
+zip_path  # Return path to the zipped version (optional)

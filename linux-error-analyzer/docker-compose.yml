@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  api-gateway:
+    build: ./api-gateway
+    ports: ["8000:8000"]
+  parser:
+    build: ./parser
+  log-watcher:
+    build: ./log-watcher
+  deduplicator:
+    build: ./deduplicator
+  analyzer:
+    build: ./analyzer
+  cli-ingest:
+    build: ./cli-ingest
+  frontend:
+    build: ./frontend
+    ports: ["3000:3000"]
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports: ["9090:9090"]
+  grafana:
+    image: grafana/grafana
+    ports: ["3001:3000"]
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+  log-generator:
+    build: ./simulations/log-generator

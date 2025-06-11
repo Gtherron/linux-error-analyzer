@@ -1,0 +1,10 @@
+replicaCount: 1
+image:
+  repository: your-repo/linux-error-analyzer
+  pullPolicy: IfNotPresent
+  tag: "latest"
+service:
+  type: ClusterIP
+  port: 8000
+ingress:
+  enabled: false
